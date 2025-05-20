@@ -1,27 +1,43 @@
 import express from "express";
-import {
-  obtenerTodas,
-  crearTrabajadora,
-  eliminarTrabajadora,
-} from "../controllers/trabajadoraController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import Trabajadora from "../models/Trabajadora.js";
 
 const router = express.Router();
 
-// Todas las rutas protegidas
-router.get("/", authMiddleware, obtenerTodas);
-router.post("/", authMiddleware, crearTrabajadora);
-router.delete("/:id", authMiddleware, eliminarTrabajadora);
+// Obtener todas
+router.get("/", authMiddleware, async (req, res) => {
+  try {
+    const lista = await Trabajadora.find();
+    res.json(lista);
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener trabajadoras" });
+  }
+});
 
-// ✅ Editar trabajadora con logs de depuración
+// Crear nueva
+router.post("/", authMiddleware, async (req, res) => {
+  try {
+    const nueva = new Trabajadora(req.body);
+    await nueva.save();
+    res.status(201).json(nueva);
+  } catch (error) {
+    res.status(400).json({ message: "Error al crear trabajadora" });
+  }
+});
+
+// Eliminar
+router.delete("/:id", authMiddleware, async (req, res) => {
+  try {
+    await Trabajadora.findByIdAndDelete(req.params.id);
+    res.json({ message: "Eliminada correctamente" });
+  } catch (error) {
+    res.status(500).json({ message: "Error al eliminar trabajadora" });
+  }
+});
+
+// Editar
 router.put("/:id", authMiddleware, async (req, res) => {
   const { nombre, id } = req.body;
-
-  console.log("➡️ Editar trabajadora:");
-  console.log("🆔 ID Mongo:", req.params.id);
-  console.log("📝 Nuevo nombre:", nombre);
-  console.log("🔢 Nuevo ID:", id);
 
   try {
     const result = await Trabajadora.findByIdAndUpdate(req.params.id, {
@@ -30,14 +46,11 @@ router.put("/:id", authMiddleware, async (req, res) => {
     });
 
     if (!result) {
-      console.warn("⚠️ No se encontró la trabajadora con ese ID.");
       return res.status(404).json({ message: "Trabajadora no encontrada" });
     }
 
-    console.log("✅ Actualización exitosa:", result);
     res.json({ message: "Actualizada correctamente" });
   } catch (error) {
-    console.error("❌ Error al actualizar trabajadora:", error);
     res.status(500).json({ message: "Error al actualizar trabajadora" });
   }
 });
