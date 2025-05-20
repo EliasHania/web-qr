@@ -14,6 +14,11 @@ app.use(express.json());
 app.use("/trabajadoras", trabajadorasRoutes);
 app.use("/api/auth", authRoutes);
 
+// ✅ Ruta de prueba para mantener activo el backend
+app.get("/ping", (req, res) => {
+  res.send("ok");
+});
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
