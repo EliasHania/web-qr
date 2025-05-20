@@ -41,7 +41,7 @@ export default function Navbar() {
         <NavLink
           to="/dashboard/gestion"
           className={({ isActive }) =>
-            `px-4 py-2 rounded-md font-semibold transition cursor-pointer ${
+            `px-4 py-2 rounded-md font-semibold transition cursor-pointer w-full sm:w-auto text-center ${
               isActive
                 ? "bg-blue-600 text-white shadow-md"
                 : "bg-gray-100 text-gray-800 hover:bg-gray-200"
