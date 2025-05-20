@@ -22,8 +22,11 @@ export default function Login() {
       const data = await res.json();
 
       if (res.ok && data.token) {
-        localStorage.setItem("token", data.token); // ✅ Guardar token JWT
-        navigate("/dashboard/qr");
+        localStorage.setItem("token", data.token);
+        // ✅ Safari fix: pequeña pausa para asegurar que se guarda bien
+        setTimeout(() => {
+          navigate("/dashboard/qr");
+        }, 50);
       } else {
         setError(data?.message || "Credenciales incorrectas");
       }
