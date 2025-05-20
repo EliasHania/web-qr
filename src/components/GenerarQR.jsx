@@ -110,7 +110,7 @@ export default function GenerarQR() {
                 name="trabajadora"
                 value={trabajadoraSeleccionada}
                 onChange={(e) => setTrabajadoraSeleccionada(e.target.value)}
-                className="w-full border border-gray-300 rounded p-2"
+                className="w-full border border-gray-300 rounded px-4 py-2 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer shadow-sm"
               >
                 <option value="todas">Mostrar todas</option>
                 {trabajadoras.map((t) => (
