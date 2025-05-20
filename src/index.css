@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* Reglas estándar de impresión */
+@media print {
+  /* Ocultar elementos que no deben imprimirse */
+  nav,
+  .no-print,
+  select,
+  label,
+  h1,
+  button {
+    display: none !important;
+  }
+
+  /* Ajustes visuales del contenedor de impresión */
+  .print-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Espaciado útil en modo impresión */
+  .print\:p-2 { padding: 0.5rem !important; }
+  .print\:pt-6 { padding-top: 1.5rem !important; }
+
+  /* Separar páginas entre bloques de QR */
+  .break-after-page {
+    page-break-after: always;
+  }
+
+  /* Tipografía y distribución para imprimir QRs */
+  .print-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  .print-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .qr-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .qr-nombre {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .qr-codigo {
+    font-size: 10px;
+    margin-top: 4px;
+  }
+}
