@@ -12,6 +12,7 @@ export default function GenerarQR() {
   useEffect(() => {
     const fetchTrabajadoras = async () => {
       const token = localStorage.getItem("token");
+      if (!token) return; // ✅ evita fetch innecesario tras logout
 
       try {
         const res = await fetch(`${API_URL}/trabajadoras`, {

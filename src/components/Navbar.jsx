@@ -5,8 +5,8 @@ export default function Navbar() {
 
   const logout = () => {
     localStorage.removeItem("token");
-    sessionStorage.removeItem("token"); // ✅ añadimos para asegurar logout completo
-    navigate("/login");
+    sessionStorage.removeItem("token");
+    window.location.href = "/login"; // ✅ Redirección forzada limpia
   };
 
   return (
@@ -36,6 +36,19 @@ export default function Navbar() {
           }
         >
           Registrar trabajadora
+        </NavLink>
+
+        <NavLink
+          to="/dashboard/gestion"
+          className={({ isActive }) =>
+            `px-4 py-2 rounded-md font-semibold transition cursor-pointer ${
+              isActive
+                ? "bg-blue-600 text-white shadow-md"
+                : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+            }`
+          }
+        >
+          Gestionar trabajadoras
         </NavLink>
 
         <button

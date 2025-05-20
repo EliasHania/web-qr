@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ onLogin }) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
@@ -33,6 +33,8 @@ export default function Login() {
       if (res.ok && data.token) {
         localStorage.setItem("token", data.token);
         sessionStorage.setItem("token", data.token);
+
+        if (onLogin) onLogin(); // ✅ Actualiza estado global de autenticación
 
         setTimeout(() => {
           navigate("/dashboard/qr");
