@@ -19,6 +19,7 @@ const isAuthenticated = () => {
 export default function App() {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
       <Route
         path="/dashboard/registro"
@@ -36,7 +37,7 @@ export default function App() {
           isAuthenticated() ? <GenerarQR /> : <Navigate to="/login" replace />
         }
       />
-      <Route path="*" element={<Navigate to="/login" />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 }
