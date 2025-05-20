@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -8,6 +8,13 @@ export default function Login() {
   const navigate = useNavigate();
 
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+  // 🔄 Ping inicial al backend (despierta Render)
+  useEffect(() => {
+    fetch(`${API_URL}/ping`).catch(() =>
+      console.warn("El backend puede estar dormido")
+    );
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,11 +29,14 @@ export default function Login() {
       const data = await res.json();
 
       if (res.ok && data.token) {
+        // ✅ Guardar en ambos storage
         localStorage.setItem("token", data.token);
-        // ✅ Safari fix: pequeña pausa para asegurar que se guarda bien
+        sessionStorage.setItem("token", data.token);
+
+        // ✅ Dar tiempo antes de redirigir
         setTimeout(() => {
           navigate("/dashboard/qr");
-        }, 50);
+        }, 100);
       } else {
         setError(data?.message || "Credenciales incorrectas");
       }
@@ -46,6 +56,7 @@ export default function Login() {
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             type="text"
+            name="usuario"
             placeholder="Usuario"
             className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={user}
@@ -55,6 +66,7 @@ export default function Login() {
 
           <input
             type="password"
+            name="password"
             placeholder="Contraseña"
             className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={pass}
