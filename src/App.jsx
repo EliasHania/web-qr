@@ -12,6 +12,10 @@ const isAuthenticated = () => {
   try {
     const payload = JSON.parse(atob(token.split(".")[1]));
     const now = Date.now() / 1000;
+
+    // ✅ Si el token no tiene 'exp', lo consideramos válido
+    if (!payload.exp) return true;
+
     return payload.exp > now;
   } catch {
     return false;
