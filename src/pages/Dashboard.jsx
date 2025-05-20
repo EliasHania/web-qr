@@ -70,7 +70,12 @@ export default function Dashboard() {
       >
         <h2 className="text-lg font-semibold mb-2">Añadir trabajadora</h2>
 
+        <label htmlFor="nombre" className="block font-medium mb-1">
+          Nombre completo
+        </label>
         <input
+          id="nombre"
+          name="nombre"
           type="text"
           placeholder="Nombre completo"
           className="border p-2 w-full mb-2 rounded"
@@ -78,7 +83,12 @@ export default function Dashboard() {
           onChange={(e) => setNombre(e.target.value)}
         />
 
+        <label htmlFor="id" className="block font-medium mb-1">
+          ID
+        </label>
         <input
+          id="id"
+          name="id"
           type="text"
           placeholder="ID (ej. 1548)"
           className="border p-2 w-full mb-2 rounded"
@@ -86,7 +96,12 @@ export default function Dashboard() {
           onChange={(e) => setId(e.target.value)}
         />
 
+        <label htmlFor="cantidad" className="block font-medium mb-1">
+          Cantidad de QRs
+        </label>
         <input
+          id="cantidad"
+          name="cantidad"
           type="number"
           placeholder="Cantidad de QRs"
           className="border p-2 w-full mb-2 rounded"

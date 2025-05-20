@@ -46,23 +46,43 @@ export default function RegistroTrabajadoras() {
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              placeholder="Nombre completo"
-              className="border border-gray-300 p-3 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              required
-            />
+            <div>
+              <label
+                htmlFor="nombre"
+                className="block text-gray-700 font-medium mb-1"
+              >
+                Nombre completo
+              </label>
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                placeholder="Nombre completo"
+                className="border border-gray-300 p-3 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                required
+              />
+            </div>
 
-            <input
-              type="text"
-              placeholder="ID (ej. 1548)"
-              className="border border-gray-300 p-3 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={id}
-              onChange={(e) => setId(e.target.value)}
-              required
-            />
+            <div>
+              <label
+                htmlFor="id"
+                className="block text-gray-700 font-medium mb-1"
+              >
+                ID
+              </label>
+              <input
+                id="id"
+                name="id"
+                type="text"
+                placeholder="ID (ej. 1548)"
+                className="border border-gray-300 p-3 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+                required
+              />
+            </div>
 
             <button
               type="submit"

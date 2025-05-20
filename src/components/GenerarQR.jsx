@@ -99,10 +99,15 @@ export default function GenerarQR() {
           <>
             {/* Selector */}
             <div className="mb-6 no-print">
-              <label className="block mb-2 text-gray-700 font-semibold">
+              <label
+                htmlFor="trabajadora"
+                className="block mb-2 text-gray-700 font-semibold"
+              >
                 Mostrar QR de trabajadora:
               </label>
               <select
+                id="trabajadora"
+                name="trabajadora"
                 value={trabajadoraSeleccionada}
                 onChange={(e) => setTrabajadoraSeleccionada(e.target.value)}
                 className="w-full border border-gray-300 rounded p-2"
