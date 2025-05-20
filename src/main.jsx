@@ -12,3 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+// 🟢 Registrar Service Worker para PWA
+import { registerSW } from "virtual:pwa-register";
+registerSW();
